@@ -14,30 +14,30 @@ spl_autoload_register(function ($class_name){
 
 $listPage = 'd10home.php';
 
-// If filmpk is not passed with page request or it's not numeric, redirect to Home Page
+// If spapk is not passed with page request or it's not numeric, redirect to Home Page
 // Else, assign the URL parameter to a variable
 
-if (!isset($_GET['filmpk'])|| !is_numeric($_GET['filmpk']))
+if (!isset($_GET['spapk'])|| !is_numeric($_GET['spapk']))
 {
     header('Location:' . $listPage);
     exit();
 }
 else
 {
-    $filmPK = (int) $_GET['filmpk'];
+    $spapk = (int) $_GET['spapk'];
 }
 
 // instantiate a d10RWSModel object
 
 $aModel = new d10RWSModel();
 
-// get the movietitle associated with the filmpk
+// get the spaname associated with the spapk
     
-$aFilm = $aModel->getAMovieTitle($filmPK);
+$aSpa = $aModel->getAspaname($spapk);
 
-if (count($aFilm) === 1)
+if (count($aSpa) === 1)
 {
-    $aTitle = $aFilm[0]['movietitle'];
+    $aTitle = $aSpa[0]['spaname'];
 }
 else
 {
@@ -55,11 +55,11 @@ $aDisplay->displayPageHeader("Reviews for <br />'$aTitle'");
 
 // call the getMovieReviews method
 
-$results = $aModel->getMovieReviews($filmPK);
+$results = $aModel->getMovieReviews($spapk);
 
 // call the displayReviews method
 
-$aDisplay->displayReviews($results, $aTitle, $filmPK);
+$aDisplay->displayReviews($results, $aTitle, $spapk);
 
 // call the displayPageFooter method 
 

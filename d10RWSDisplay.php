@@ -81,11 +81,11 @@ class d10RWSDisplay
     {
         $output = <<<HTML
                     <form action="d10Search.php" method = "post" name="SearchByMultiCriteria" id="SearchByMultiCriteria">
-                    <label for="movietitle">Film Title:</label>
-                    <input type="text" name="movietitle" id="movietitle" maxlength="50" value="$aTitle" />
+                    <label for="spaname">spa Title:</label>
+                    <input type="text" name="spaname" id="spaname" maxlength="50" value="$aTitle" />
                     <label for="pitchtext">Tag Line:</label>
                     <input type="text" name="pitchtext" id="pitchtext" maxlength="50" value="$aPitch" />
-                    <label for="rating">Film Rating:</label>
+                    <label for="rating">spa Rating:</label>
                     <select name="ratingpk" id="rating">
                     <option value=""></option>
                 HTML;
@@ -94,9 +94,9 @@ class d10RWSDisplay
 
         $aModel = new d10RWSModel();
 
-        // call the getFilmRatings method
+        // call the getspaRatings method
 
-        $ratingsList = $aModel->getFilmRatings(); 
+        $ratingsList = $aModel->getspaRatings(); 
          
         foreach ($ratingsList as $aRating)
         {
@@ -129,33 +129,33 @@ class d10RWSDisplay
         
         if ($count === 0)
         {
-            echo "<h3>No matching film(s) found</h3>";
+            echo "<h3>No matching spa(s) found</h3>";
             return;
         }
         
         $output = <<<HTML
                     <table>
-                    <caption>$count film(s) found</caption>
+                    <caption>$count spa(s) found</caption>
                         <tbody>
                 HTML;
         
-        $filmNum = 0;
+        $spaNum = 0;
         
-        foreach ($aResults as $aFilm)
+        foreach ($aResults as $aspa)
         {
-            extract($aFilm);
-            $filmNum ++;
-            $filmpk = urlencode(trim($filmpk));
+            extract($aspa);
+            $spaNum ++;
+            $spapk = urlencode(trim($spapk));
             $dateReleased = date_format(new DateTime($dateintheaters), "F j, Y");
         
             $output .= <<<HTML
                         <tr>
-                            <td>$filmNum: $movietitle<br />
+                            <td>$spaNum: $spaname<br />
                                 $pitchtext
                             </td>
                             <td>
                                 $dateReleased <br />
-                                <a href="d10Reviews.php?filmpk=$filmpk">View Reviews</a>
+                                <a href="d10Reviews.php?spapk=$spapk">View Reviews</a>
                             </td>
                         </tr>
                         <tr>
@@ -222,7 +222,7 @@ class d10RWSDisplay
         }
         $output .= <<<HTML
                         <p style="text-align: center">
-                            <a href="d10AddEditreview.php?filmpk=$aPK">[Review Film]</a> 
+                            <a href="d10AddEditreview.php?spapk=$aPK">[Review spa]</a> 
                                 &nbsp;&nbsp;<a href="d10Search.php">[Back to Search Page]</a>
                         </p>
                     HTML;
@@ -236,7 +236,7 @@ class d10RWSDisplay
         if ($count === 0)
         {
             echo '<h3 style="text-align:center">You don\'t have reviews. <a href="d10Search.php">
-                Find films to review</a></h3>';
+                Find spas to review</a></h3>';
         }
         else
         {
@@ -255,7 +255,7 @@ class d10RWSDisplay
                 $output .= <<<HTML
                             <tr>
                                 <td>
-                                    $movietitle
+                                    $spaname
                                 </td>
                                 <td colspan="3">
                                     $reviewsummary
@@ -296,7 +296,7 @@ class d10RWSDisplay
             $reviewsummary = '';
             $reviewrating = '';
             $buttonText = 'Add';
-            $hiddenInputName = 'filmpk';
+            $hiddenInputName = 'spapk';
         }
         else
         {
