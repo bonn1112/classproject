@@ -23,7 +23,7 @@ class d10RWSDisplay
                     <html>
                         <head>
                             <meta charset="UTF-8" />
-                            <title>Rockwell Studios</title>
+                            <title>Spa</title>
                             <meta name="viewport" content="width=device-width, initial-scale=1" />  
                             <link rel="stylesheet" href="d10StylesRWS.css" type="text/css" />
                         </head>
@@ -36,7 +36,7 @@ class d10RWSDisplay
                             <nav>
                                 <ul>
                                     <li><a href="d10Home.php">Home</a></li>
-                                    <li><a href="d10Search.php">Search Films</a></li>
+                                    <li><a href="d10Search.php">Search Spa</a></li>
                                     <li><a href="d10MyReviews.php">My Reviews</a></li>
                     ABC;
         // the session array element "userInfo" will be set if the user has been authenticated

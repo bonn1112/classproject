@@ -78,46 +78,46 @@ class d10RWSModel
         $conn = null;
     }
         
-    // return film ratings
+    // return spa ratings
     
-    function getFilmRatings() : array
+    function getspaRatings() : array
     {
         $query = <<<STR
                     Select ratingpk, rating
-                    From filmrating
+                    From sparating
                     Order by ratingpk
                  STR;
         
         return self::executeQuery($query);
     }
     
-    // return film rating for a ratingPK
+    // return spa rating for a ratingPK
     
-    function getAFilmRating(int $aPK) : array
+    function getAspaRating(int $aPK) : array
     {
         $query = <<<STR
                     Select ratingpk, rating
-                    From filmrating
+                    From sparating
                     where ratingpk = $aPK
                 STR;
         
         return self::executeQuery($query);
     }
 
-    // search for films by movietitle, pitch text and/or rating
+    // search for spas by spaname, pitch text and/or rating
     
-    function getFilmsByMultiCriteria(string $aTitle, string $aPitchText, int $aRatingPK) : Array
+    function getspasByMultiCriteria(string $aTitle, string $aPitchText, int $aRatingPK) : Array
     {
         $query = <<<STR
-                    Select filmpk, movietitle, pitchtext, summary, dateintheaters
-                    From film
+                    Select spapk, spaname, pitchtext, summary, dateintheaters
+                    From spa
                     Where 0=0
                 STR;
         
         if ($aTitle != '')
         {
             $query .= <<<STR
-                        And movietitle like '%$aTitle%'
+                        And spaname like '%$aTitle%'
                     STR;
         }
         
@@ -136,34 +136,34 @@ class d10RWSModel
         }
     
         $query .= <<<STR
-                    Order by movietitle
+                    Order by spaname
                 STR;
         
         return self::executeQuery($query);
     }
 
-    // return the movie title for a film
+    // return the spa name for a spapk
     
-    function getAMovieTitle(int $aFilmPK) : array
+    function getAcourseName(int $aSpaPK) : array
     {
         $query = <<<STR
-                    Select movietitle
-                    From film
-                    Where filmpk = $aFilmPK
+                    Select spaname
+                    From spa
+                    Where spapk = $aSpaPK
                 STR;
 
         return self::executeQuery($query);
     }
 
-    // return reviews for a film
+    // return reviews for a spa
     
-    function getMovieReviews(int $aFilmPK) : array
+    function getSpaReviews(int $aSpaPK) : array
     {
         $query = <<<STR
                     Select reviewpk, reviewdate, reviewsummary, reviewrating, contactfk, 
                         firstname, lastname
-                    From filmreview inner join contact on contactpk = contactfk
-                    where filmfk = $aFilmPK
+                    From spareview inner join contact on contactpk = contactfk
+                    where spafk = $aSpaPK
                 STR;
 
         return self::executeQuery($query);
@@ -174,8 +174,8 @@ class d10RWSModel
     function getUserReviews(int $aContactPK) : array
     {
         $query = <<<STR
-                    Select reviewpk, reviewdate, reviewsummary, reviewrating, movietitle
-                    From filmreview inner join film on filmpk = filmfk
+                    Select reviewpk, reviewdate, reviewsummary, reviewrating, spaname
+                    From spareview inner join spa on spapk = spafk
                     where contactfk = $aContactPK
                     Order by reviewdate desc
                 STR;
@@ -188,8 +188,8 @@ class d10RWSModel
     function getReviewDetails(int $aReviewPK, int $aContactFK) : array
     {
         $query = <<<STR
-                    Select reviewsummary, reviewrating, movietitle
-                    From filmreview inner join film on filmpk = filmfk
+                    Select reviewsummary, reviewrating, spaname
+                    From spareview inner join spa on  = spafk
                     where reviewpk = $aReviewPK and contactfk = $aContactFK
                 STR;
 
@@ -244,11 +244,11 @@ class d10RWSModel
     
     // insert a new review
     
-    function addNewReview(string $aSummary, int $aRating, int $aFilmFK, int $aContactFK) : void
+    function addNewReview(string $aSummary, int $aRating, int $aspaFK, int $aContactFK) : void
     {
         $query = <<<STR
-                    Insert Into filmreview(reviewsummary,reviewrating,filmfk,contactfk)
-                    Values('$aSummary', $aRating, $aFilmFK, $aContactFK)
+                    Insert Into spareview(reviewsummary,reviewrating,spafk,contactfk)
+                    Values('$aSummary', $aRating, $aspaFK, $aContactFK)
                 STR;
         
         self::executeQuery($query);
@@ -259,7 +259,7 @@ class d10RWSModel
     function updateReview(int $aReviewPK, string $aSummary, int $aRating) : void
     {
         $query = <<<STR
-                    Update filmreview
+                    Update spareview
                     Set reviewsummary = '$aSummary', reviewrating = $aRating
                     Where reviewpk = $aReviewPK
                 STR;
@@ -273,7 +273,7 @@ class d10RWSModel
     {
         $query = <<<STR
                     delete
-                    from filmreview            
+                    from spareview            
                     where reviewpk = $aReviewPK and contactfk = $aContactFK
                 STR;
         

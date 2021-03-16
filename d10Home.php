@@ -28,11 +28,11 @@ $userFName = (isset($_SESSION['userInfo']))? $_SESSION['userInfo']['firstname'] 
 
 if (!empty($userFName))
     {
-        echo "<p>Welcome back to Rockwell Studios, $userFName!</p>";
+        echo "<p>Welcome back to Spa course, $userFName!</p>";
     }
     else
     {
-        echo "<p>Hello, and welcome to Rockwell Studios!</p>";
+        echo "<p>Hello, and welcome to Spa course</p>";
     }
 ?>
 
