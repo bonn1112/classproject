@@ -12,7 +12,7 @@ spl_autoload_register(function ($class_name){
     include $class_name . '.php';
 });
 
-$movieTitle = "";
+$spaname = "";
 $pitchText = "";
 $ratingPK = "";
 
@@ -22,24 +22,24 @@ $aDisplay = new d10RWSDisplay();
 
 // call the displayPageHeader method
 
-$aDisplay->displayPageHeader("Find Films");
+$aDisplay->displayPageHeader("Find Courses");
 
 if (isset($_POST['search']))
 {
-    $movieTitle = $_POST['movietitle'];
+    $spaname = $_POST['spaname'];
     $pitchText = $_POST['pitchtext'];
     $ratingPK = $_POST['ratingpk'];
 
     // remove any potentially malicious characters
 
-    $movieTitle = preg_replace("/[^a-zA-Z0-9\s]/", '', $movieTitle);
+    $spaname = preg_replace("/[^a-zA-Z0-9\s]/", '', $spaname);
     $pitchText = preg_replace("/[^a-zA-Z0-9\s]/", '', $pitchText);
     $ratingPK = preg_replace("/[^0-9]/", "", $ratingPK);
 }
 
 // call the displaySearchForm method
 
-$aDisplay->displaySearchForm($movieTitle,$pitchText, (int)$ratingPK);
+$aDisplay->displaySearchForm($spaname,$pitchText, (int)$ratingPK);
 
 // if the user initiated a search
 
@@ -49,7 +49,7 @@ if (isset($_POST['search']))
 
     $aModel = new d10RWSModel();
     
-    $results = $aModel->getFilmsByMultiCriteria($movieTitle,$pitchText, (int)$ratingPK);
+    $results = $aModel->getFilmsByMultiCriteria($spaname,$pitchText, (int)$ratingPK);
     
     // call the displaySearchResults method
 
