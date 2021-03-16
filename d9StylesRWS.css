@@ -1,0 +1,339 @@
+/* 
+    Document   : d9StylesRWS.css
+    Created on : March 2021
+    Author     : LV
+    Description: Style sheet for RWS Demos
+*/
+
+article, header, footer, figure, section, form
+{
+    display: block;
+}
+
+html
+{
+   background-color: rgb(255,255,255) 
+}
+
+body
+{
+    background-color: rgb(217,120,45);
+    margin: 0px auto;
+    padding: 0px;
+    width: 98%;
+    max-width: 950px;
+    min-width: 250px;
+    
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 125%;
+    line-height: 1.5em;
+    position: relative;
+}
+
+header h2
+{
+	background-color: rgb(30, 77, 43);
+	color: rgba(255, 255, 255, 0.8);
+	line-height: 1.4em;
+	text-align: center;
+}
+
+section
+{
+   margin:36px;
+}
+
+nav
+{
+   width: 180px;
+   float:left;
+   margin-right: 10px;
+}
+
+nav ul
+{
+   background-color: rgb(200, 195, 114);
+   line-height: 2em;
+   list-style-type: none;
+   padding-left: 0.5em;
+}
+
+nav ul li:hover
+{
+   background-color: rgb(55, 102, 55);
+}
+
+nav ul li:first-of-type
+{
+   text-transform: uppercase;
+}
+
+nav ul li a
+{
+   color: white;
+   text-decoration: none;
+}
+
+table
+{
+   border-width: 6px;
+   border-style: outset;
+   border-color: rgb(55, 102, 55);
+   border-collapse: collapse;
+   font-family: Arial,Helvetica,sans-serif;
+   font-size: 0.85em;
+   line-height: 1.3em;
+   width: 100%
+}
+
+table col.firstcol
+{
+   width: 37%;
+}
+
+table tbody td:first-of-type
+{
+   font-weight: 600;
+}
+
+table tbody td:nth-of-type(2)
+{
+   font-style: italic;
+}
+table th, table td
+{
+   border: 1px solid gray;
+}
+
+table thead
+{
+   background-color: rgb(200, 195, 114);
+}
+
+table caption
+{
+   font-weight: bold;
+   font-size: 1.2em;
+}
+
+table tbody td
+{
+   padding: 5px;
+   vertical-align: top;
+}
+
+table tbody tr:nth-of-type(odd)
+{
+   background-color: rgb(213, 213, 184);
+}
+
+table tbody tr:nth-of-type(even)
+{
+   background-color: rgb(215, 230, 220);
+}
+
+table#allMovies
+{
+   width: 70%;
+   margin: 0px auto;
+}
+
+table#allMovies td
+{
+   font-style: normal;
+}
+
+table#merchandise
+{
+   border-style: hidden;
+   width: 70%;
+   margin: 0px auto;
+}
+
+table#merchandise tbody tr
+{
+   background-color: rgb(217,120,45);
+   border-style: hidden;
+   height: 100px;
+}
+
+table#merchandise tbody td
+{
+   border-style: hidden;
+   text-align: center;
+   padding-bottom: 20px;
+}
+
+figure
+{
+   text-align: center;
+}
+
+figure img
+{
+   height: 300px;
+   width: 250px;
+}
+
+article#MovieDetail
+{
+   margin: 20px;
+}
+
+article#MovieDetail dt
+{
+   font-weight: bold;
+}
+
+article#MovieDetail dd
+{
+   font-style: italic;
+}
+
+article#MovieDetail p
+{
+   text-align: center;
+}
+
+#error
+{
+   background-color: red; 
+   border-width: 1px; 
+   border-color: orange; 
+   border-style: solid;
+   text-align: center;
+   width: 50%;
+   /*margin:0px auto;*/
+   margin-bottom: 15px;
+   margin-left: 21%;
+}
+
+footer
+{
+   clear: both;
+}
+
+footer address
+{
+   background-color: rgb(200, 195, 114);
+   color: rgba(89, 89, 91, 0.8);
+   font-style: normal;
+   font-variant: small-caps;
+   font-size: 0.9em;
+   line-height: 2em;
+   font-family: 'Times New Roman', Times, Serif;
+   text-align: center;
+}
+
+/* article#searchCriteria */
+form
+{
+   margin:0px auto;
+   width: 80%;
+}
+
+form#signInForm
+{
+  width:70%;
+  float:left;
+}
+
+form#registerForm
+{
+  float:left;
+}
+
+label
+{
+  clear: left;
+  display: block;
+  float: left;
+  width: 30%;
+  margin:10px 0px;
+  font-weight: bold;
+}
+
+input
+{
+   display: block;
+   float: left;
+   width: 60%;
+   height: 30px;
+   font-size: 1.2em;
+   margin:10px 0px;
+}
+
+input.ten
+{
+   width: 25%
+}
+
+input.twenty
+{
+   width: 50%
+}
+
+input#state
+{
+   width: 5%;
+}
+
+input#mailinglist
+{
+   width: 3%;
+}
+
+#searchmaxrows
+{
+   width:5%;
+}
+
+textarea
+{
+   display: block;
+   float: left;
+   width: 60%;
+   height: 130px;
+   font-size: 1.2em;
+   margin:10px 0px;
+}
+
+input.sm
+{
+   width: 30%;
+}
+
+select
+{
+   display: block;
+   float: left;
+   font-size: 1.2em;
+   margin:10px 0px;
+}
+
+form p
+{
+   clear:both;
+   margin-left: 30%;
+}
+
+input[type="submit"]
+{
+   display:inline;
+   float:none;
+   height: 40px;
+   width: 180px;
+}
+
+input#proceed
+{
+   width: 210px;
+}
+
+.err
+{
+   float: left;
+   margin-left: 10px;
+   color: red;
+   display: none;
+}
