@@ -12,9 +12,9 @@ class d10RWSModel
     private static function dbConnect() : object
     {
         $serverName = 'buscissql1901\cisweb';
-        $uName = 'csu';
-        $pWord = 'rams';
-        $db = 'RWStudios';
+        $uName = 'exposed';
+        $pWord = 'source';
+        $db = 'Team115DB';
     
         try
         {

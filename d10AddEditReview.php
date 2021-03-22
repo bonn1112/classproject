@@ -23,28 +23,28 @@ $contactPK = (int) $_SESSION['userInfo']['contactpk'];
 
 $editmode = false;
 
-// if a numeric filmpk was passed through the URL
+// if a numeric spapk was passed through the URL
 
-if ((isset($_GET['filmpk'])) && (is_numeric($_GET['filmpk'])))
+if ((isset($_GET['spapk'])) && (is_numeric($_GET['spapk'])))
 {
-    $filmPK = (int) $_GET['filmpk'];
+    $spapk = (int) $_GET['spapk'];
     
     // instantiate a d10RWSModel object
 
     $aModel = new d10RWSModel();
 
-    // get the movietitle associated with the filmpk
+    // get the spaname associated with the spapk
     
-    $aFilm = $aModel->getAMovieTitle($filmPK);
+    $aSpa = $aModel->getAspaname($spapk);
 
-    if (count($aFilm) !== 1)
+    if (count($aSpa) !== 1)
     {
         header('Location:' . $homePage);
         exit();
     }
     else
     {
-        $formTitle = "Add a review for <br /> '{$aFilm[0]['movietitle']}'";
+        $formTitle = "Add a review for <br /> '{$aSpa[0]['spaname']}'";
     }    
 }
 // elseif a numeric reviewpk was passed through the URL
@@ -70,11 +70,11 @@ elseif ((isset($_GET['reviewpk'])) && (is_numeric($_GET['reviewpk'])))
     }
     else
     {
-        $formTitle = "Update your review of <br /> '{$reviewDetails[0]['movietitle']}'";
+        $formTitle = "Update your review of <br /> '{$reviewDetails[0]['spaname']}'";
         $editmode = true;
     }
 }
- // else (i.e., this page was accessed without a valid filmpk or reviewpk), redirect to home page
+ // else (i.e., this page was accessed without a valid spapk or reviewpk), redirect to home page
  else
  {
      header('Location:' . $homePage);
@@ -97,7 +97,7 @@ if ($editmode)
 }
  else 
 {
-     $aDisplay->displayAddEditReviewForm($filmPK);
+     $aDisplay->displayAddEditReviewForm($spapk);
 }
 
 // call the displayPageFooter method 
