@@ -242,14 +242,15 @@ class d10RWSDisplay
         {
             extract($aspa);
             $spaNum ++;
-            $spapk = urlencode(trim($spapk));
-            $dateReleased = date_format(new DateTime($dateintheaters), "F j, Y");
+            $spapk = urlencode(($treatments_id));
+            //$dateReleased = date_format(new DateTime($dateintheaters), "F j, Y");
         
             $output .= <<<HTML
                         <tr>
-                            <td>$spaNum: $spaname<br />
-                                $pitchtext
+                            <td>$spaNum: $treatments for $hours is $$price<br />
+                                
                             </td>
+                            
                             <td>
                                 $dateReleased <br />
                                 <a href="d10Reviews.php?spapk=$spapk">View Reviews</a>
@@ -287,24 +288,25 @@ class d10RWSDisplay
             foreach ($aResults as $aReview)
             {
                 extract($aReview);
-                $reviewpk = urlencode(trim($reviewpk));
-                $reviewdate = date_format(new DateTime($reviewdate), "F j, Y");
+                
+                $reviewpk = urlencode(($ReviewPK));
+                $reviewdate = date_format(new DateTime($ReviewDate), "F j, Y");
 
                 $output .= <<<HTML
                             <tr>
                                 <td colspan="3">
-                                    $reviewsummary
+                                    $ReviewSummary
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    $reviewrating Reels
+                                    $ReviewRating Reels
                                 </td>
                                 <td>
                                     Review Date: $reviewdate
                                 </td>
                                 <td>
-                                    Reviewer: $firstname $lastname
+                                    Reviewer: $FirstName $LastName
                         HTML;
                 if (isset($_SESSION['userInfo']) && $_SESSION['userInfo']['contactpk']===$contactfk)
                 {    

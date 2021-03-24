@@ -33,11 +33,11 @@ $aModel = new d10RWSModel();
 
 // get the spaname associated with the spapk
     
-$aSpa = $aModel->getAspaname($spapk);
+$aSpa = $aModel->getAcourseName($spapk);
 
 if (count($aSpa) === 1)
 {
-    $aTitle = $aSpa[0]['spaname'];
+    $aTitle = $aSpa[0]['treatments'];
 }
 else
 {
@@ -55,7 +55,7 @@ $aDisplay->displayPageHeader("Reviews for <br />'$aTitle'");
 
 // call the getMovieReviews method
 
-$results = $aModel->getMovieReviews($spapk);
+$results = $aModel->getSpaReviews($spapk);
 
 // call the displayReviews method
 

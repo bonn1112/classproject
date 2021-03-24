@@ -51,7 +51,7 @@ if (isset($_POST['search']))
 
     $aModel = new d10RWSModel();
     
-    $results = $aModel->getFilmsByMultiCriteria($spaname,$pitchText, (int)$ratingPK);
+    $results = $aModel->getspasByMultiCriteria($spaname,$pitchText, (int)$ratingPK);
     
     // call the displaySearchResults method
 
