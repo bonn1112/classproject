@@ -509,10 +509,6 @@ class d10RWSDisplay
                         <input type="text" name="zip" id ="zip" value="$zip" maxlength="10" 
                             class="ten" required="true" pattern="^\d{5}(-\d{4})?$" 
                             title="Enter a valid 5 or 9 digit zip code" />    
-                        <label for="country">Country:</label>
-                        <input type="text" name="country" id ="country" value="$country" maxlength="20" 
-                            class="twenty" required="true" pattern="^[a-zA-Z][a-zA-Z\s]*[a-zA-Z]$" 
-                            title="Country has invalid characters" />     
                         <label for="email">Email:</label>
                         <input type="text" name="email" id ="email" value="$email" maxlength="50" 
                             class="twenty" required="true" pattern="^[\w\-\.]+@[\w]+\.[a-zA-Z]{2,4}$" 
@@ -521,8 +517,6 @@ class d10RWSDisplay
                         <input type="text" name="phone" id ="phone" value="$phone" maxlength="12" 
                             class="ten" required="true" pattern="^(\d{3}-)?\d{3}-\d{4}$" 
                                 title="Enter a valid phone number" />
-                        <label for="mailinglist">Join mailing list?</label>
-                        <input type="checkbox" name="mailinglist" id="mailinglist" $checked /> 
                         <p>
                             <input type="submit" value="Register" name="register" /> <br />
                         </p>
