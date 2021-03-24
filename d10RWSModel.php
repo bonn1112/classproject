@@ -12,9 +12,9 @@ class d10RWSModel
     private static function dbConnect() : object
     {
         $serverName = 'buscissql1901\cisweb';
-        $uName = 'csu';
-        $pWord = 'rams';
-        $db = 'RWStudios';
+        $uName = 'exposed';
+        $pWord = 'source';
+        $db = 'Team115DB';
     
         try
         {
@@ -109,7 +109,7 @@ class d10RWSModel
     function getspasByMultiCriteria(string $aTitle, string $aPitchText, int $aRatingPK) : Array
     {
         $query = <<<STR
-                    Select spapk, spaname, pitchtext, summary, dateintheaters
+                    Select *
                     From spa
                     Where 0=0
                 STR;
@@ -117,26 +117,20 @@ class d10RWSModel
         if ($aTitle != '')
         {
             $query .= <<<STR
-                        And spaname like '%$aTitle%'
+                        And treatments like '%$aTitle%'
                     STR;
         }
         
         if ($aPitchText != '')
         {
             $query .= <<<STR
-                        And pitchtext like '%$aPitchText%'
+                        And hours like '%$aPitchText%'
                     STR;
         }
         
-        if ($aRatingPK != '')
-        {
-            $query .= <<<STR
-                        And ratingfk = $aRatingPK
-                    STR;
-        }
-    
+       
         $query .= <<<STR
-                    Order by spaname
+                    Order by treatments
                 STR;
         
         return self::executeQuery($query);
@@ -147,9 +141,9 @@ class d10RWSModel
     function getAcourseName(int $aSpaPK) : array
     {
         $query = <<<STR
-                    Select spaname
+                    Select treatments
                     From spa
-                    Where spapk = $aSpaPK
+                    Where treatments_id = $aSpaPK
                 STR;
 
         return self::executeQuery($query);
@@ -160,9 +154,8 @@ class d10RWSModel
     function getSpaReviews(int $aSpaPK) : array
     {
         $query = <<<STR
-                    Select reviewpk, reviewdate, reviewsummary, reviewrating, contactfk, 
-                        firstname, lastname
-                    From spareview inner join contact on contactpk = contactfk
+                    Select *
+                    From spareview left join contact on contactpk = contactfk
                     where spafk = $aSpaPK
                 STR;
 
@@ -234,9 +227,9 @@ class d10RWSModel
         
         $query = <<<STR
                     Insert Into contact(userlogin, userpassword, firstname, lastname, address, 
-                        city, state, zip, country, email, phone, mailinglist)
+                        city, state, zip, email, phone)
                     Values('$userlogin','$userpassword','$firstname','$lastname','$address','$city',
-                        '$state','$zip','$country','$email','$phone','$mailinglist')
+                        '$state','$zip','$email','$phone')
             STR;
         
         self::executeQuery($query);

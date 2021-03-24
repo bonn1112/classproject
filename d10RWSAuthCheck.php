@@ -17,10 +17,10 @@ class d10RWSAuthCheck
     {
         if (!isset($_SESSION['userInfo']))
         {
-            if (isset($_GET['filmpk']) && is_numeric($_GET['filmpk']))
+            if (isset($_GET['spapk']) && is_numeric($_GET['spapk']))
             {
-                $filmPK = (int) $_GET['filmpk'];
-                $aRedirect .= '?filmpk=' . $filmPK;
+                $spaPK = (int) $_GET['spapk'];
+                $aRedirect .= '?spapk=' . $spaPK;
             }
             header('location: d10SignIn.php?redirect=' . $aRedirect);
             die();

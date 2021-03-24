@@ -30,14 +30,14 @@ class d10RWSDisplay
 
                         <body>
                             <header>
-                                <h2>Rockwell Studios - $pageTitle </h2>
+                                <h2>Welcome to Yume Shima Spa</h2>
                             </header>
                             
                             <nav>
                                 <ul>
                                     <li><a href="d10Home.php">Home</a></li>
                                     <li><a href="d10Search.php">Search Spa</a></li>
-                                    <li><a href="d10MyReviews.php">My Reviews</a></li>
+                                    <li><a href="d10MyReviews.php">Spa Reviews</a></li>
                     ABC;
         // the session array element "userInfo" will be set if the user has been authenticated
 
@@ -68,7 +68,7 @@ class d10RWSDisplay
                </section>
                <footer>
                <address>
-                  &copy; $year Rockwell Studios
+                  &copy; $year Yume Shima Spa
                </address>
             </footer>   
           </body>
@@ -81,22 +81,119 @@ class d10RWSDisplay
     {
         $output = <<<HTML
                     <form action="d10Search.php" method = "post" name="SearchByMultiCriteria" id="SearchByMultiCriteria">
-                    <label for="movietitle">Film Title:</label>
-                    <input type="text" name="movietitle" id="movietitle" maxlength="50" value="$aTitle" />
+                    <label for="spaname">Spa Title:</label>
+                    <input type="text" name="spaname" id="spaname" maxlength="50" value="$aTitle" />
                     <label for="pitchtext">Tag Line:</label>
                     <input type="text" name="pitchtext" id="pitchtext" maxlength="50" value="$aPitch" />
-                    <label for="rating">Film Rating:</label>
+                    <label for="rating">Spa Rating:</label>
                     <select name="ratingpk" id="rating">
                     <option value=""></option>
+                
+                    <label <h1>Our Services  <img src="https://cisweb.biz.colostate.edu/cis665/SP21Tan.studia/PHPDemos/PhpProject/photo2.jpg" alt="Yume Shima Spa" /></h1></label>
+        
+                     <p>Services that we provide:</p>
+
+                    <ul>
+                        <li>Anti-Oxidant Hot Bed Spa</li>
+                        <li>Body Massage Treatments</li>
+                        <li>Foot Spa</li>
+                        <li>Face Treatments</li>
+                        <li>Manicure and Pedicure</li>
+                        <li>Waxing</li>
+                        <li>Ear Candling Therapy</li>
+                        <li>Hair Treatments</li>
+
+
+                    </ul>
+
+                     <p>
+
+                    <table class="programs">
+                        <caption>Yume Shima Spa</caption>
+                        <colgroup>
+                            <col class="timeColumn">
+
+                            <col span="1" class="hours">
+
+                            <col span="1" class="price">
+                        </colgroup>
+
+
+                    <thead>
+                        <tr>
+                            <th>Treatments</th>
+                            <th>Hours</th>
+                            <th>Price</th>
+
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <td colspan="8">Copyright © 2021 The Yume Shima Spa. Designed and Maintained by Leonardy Tan and Yosuke Akutsu</td>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr>
+                            <th>Anti-Oxidant Hot Bed Spa</th>
+                            <td rowspan="1" colspan="1">1.5 hours</td>
+                            <td rowspan="1" colspan="2">$40</td>
+
+                        </tr>
+
+                        <tr>
+                            <th>Body Massage Treatments</th>
+                            <td rowspan="1">2 hours</td>
+                            <td rowspan="1">$50</td>
+                        </tr>
+
+                        <tr>
+                            <th>Foot Spa</th>
+                            <td colspan="1">1 hour</td>
+                            <td rowspan="1">$30</td>
+
+                        </tr>
+
+                        <tr>
+                            <th>Face Treatments</th>
+                            <td rowspan="1" colspan="1">1 hour</td>
+                            <td rowspan="1">$25</td>
+
+                        </tr>
+
+
+                        <tr>
+                            <th>Manicure and Pedicure</th>
+                            <td rowspan="1">2 hours</td>
+                            <td rowspan="1">$30</td>
+                        </tr>
+                        <tr>
+                            <th>Waxing</th>
+                            <td rowspan="1" colspan="1">2 hours</td>
+                            <td rowspan="1">$30</td>
+                        </tr>
+
+                        <tr>
+                            <th>Ear Candling Therapy</th>
+                            <td rowspan="1">1 hour</td>
+                            <td rowspan="1">$20</td>
+                        </tr>
+
+                        <tr>
+                            <th>Hair Treatments</th>
+                            <td colspan="1">1.5 hours</td>
+                            <td rowspan="1">$50</td>
+                        </tr>
+                     </tbody>
+                     </table>
                 HTML;
         
         // instantiate a d10RWSModel object
 
         $aModel = new d10RWSModel();
 
-        // call the getFilmRatings method
+        // call the getspaRatings method
 
-        $ratingsList = $aModel->getFilmRatings(); 
+        $ratingsList = $aModel->getspaRatings(); 
          
         foreach ($ratingsList as $aRating)
         {
@@ -129,33 +226,34 @@ class d10RWSDisplay
         
         if ($count === 0)
         {
-            echo "<h3>No matching film(s) found</h3>";
+            echo "<h3>No matching spa(s) found</h3>";
             return;
         }
         
         $output = <<<HTML
                     <table>
-                    <caption>$count film(s) found</caption>
+                    <caption>$count spa(s) found</caption>
                         <tbody>
                 HTML;
         
-        $filmNum = 0;
+        $spaNum = 0;
         
-        foreach ($aResults as $aFilm)
+        foreach ($aResults as $aspa)
         {
-            extract($aFilm);
-            $filmNum ++;
-            $filmpk = urlencode(trim($filmpk));
-            $dateReleased = date_format(new DateTime($dateintheaters), "F j, Y");
+            extract($aspa);
+            $spaNum ++;
+            $spapk = urlencode(($treatments_id));
+            //$dateReleased = date_format(new DateTime($dateintheaters), "F j, Y");
         
             $output .= <<<HTML
                         <tr>
-                            <td>$filmNum: $movietitle<br />
-                                $pitchtext
+                            <td>$spaNum: $treatments for $hours is $$price<br />
+                                
                             </td>
+                            
                             <td>
                                 $dateReleased <br />
-                                <a href="d10Reviews.php?filmpk=$filmpk">View Reviews</a>
+                                <a href="d10Reviews.php?spapk=$spapk">View Reviews</a>
                             </td>
                         </tr>
                         <tr>
@@ -190,24 +288,25 @@ class d10RWSDisplay
             foreach ($aResults as $aReview)
             {
                 extract($aReview);
-                $reviewpk = urlencode(trim($reviewpk));
-                $reviewdate = date_format(new DateTime($reviewdate), "F j, Y");
+                
+                $reviewpk = urlencode(($ReviewPK));
+                $reviewdate = date_format(new DateTime($ReviewDate), "F j, Y");
 
                 $output .= <<<HTML
                             <tr>
                                 <td colspan="3">
-                                    $reviewsummary
+                                    $ReviewSummary
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    $reviewrating Reels
+                                    $ReviewRating Reels
                                 </td>
                                 <td>
                                     Review Date: $reviewdate
                                 </td>
                                 <td>
-                                    Reviewer: $firstname $lastname
+                                    Reviewer: $FirstName $LastName
                         HTML;
                 if (isset($_SESSION['userInfo']) && $_SESSION['userInfo']['contactpk']===$contactfk)
                 {    
@@ -222,7 +321,7 @@ class d10RWSDisplay
         }
         $output .= <<<HTML
                         <p style="text-align: center">
-                            <a href="d10AddEditreview.php?filmpk=$aPK">[Review Film]</a> 
+                            <a href="d10AddEditreview.php?spapk=$aPK">[Review spa]</a> 
                                 &nbsp;&nbsp;<a href="d10Search.php">[Back to Search Page]</a>
                         </p>
                     HTML;
@@ -236,7 +335,7 @@ class d10RWSDisplay
         if ($count === 0)
         {
             echo '<h3 style="text-align:center">You don\'t have reviews. <a href="d10Search.php">
-                Find films to review</a></h3>';
+                Find spas to review</a></h3>';
         }
         else
         {
@@ -255,7 +354,7 @@ class d10RWSDisplay
                 $output .= <<<HTML
                             <tr>
                                 <td>
-                                    $movietitle
+                                    $spaname
                                 </td>
                                 <td colspan="3">
                                     $reviewsummary
@@ -296,7 +395,7 @@ class d10RWSDisplay
             $reviewsummary = '';
             $reviewrating = '';
             $buttonText = 'Add';
-            $hiddenInputName = 'filmpk';
+            $hiddenInputName = 'spapk';
         }
         else
         {
@@ -410,10 +509,6 @@ class d10RWSDisplay
                         <input type="text" name="zip" id ="zip" value="$zip" maxlength="10" 
                             class="ten" required="true" pattern="^\d{5}(-\d{4})?$" 
                             title="Enter a valid 5 or 9 digit zip code" />    
-                        <label for="country">Country:</label>
-                        <input type="text" name="country" id ="country" value="$country" maxlength="20" 
-                            class="twenty" required="true" pattern="^[a-zA-Z][a-zA-Z\s]*[a-zA-Z]$" 
-                            title="Country has invalid characters" />     
                         <label for="email">Email:</label>
                         <input type="text" name="email" id ="email" value="$email" maxlength="50" 
                             class="twenty" required="true" pattern="^[\w\-\.]+@[\w]+\.[a-zA-Z]{2,4}$" 
@@ -422,8 +517,6 @@ class d10RWSDisplay
                         <input type="text" name="phone" id ="phone" value="$phone" maxlength="12" 
                             class="ten" required="true" pattern="^(\d{3}-)?\d{3}-\d{4}$" 
                                 title="Enter a valid phone number" />
-                        <label for="mailinglist">Join mailing list?</label>
-                        <input type="checkbox" name="mailinglist" id="mailinglist" $checked /> 
                         <p>
                             <input type="submit" value="Register" name="register" /> <br />
                         </p>
