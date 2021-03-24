@@ -26,10 +26,8 @@ $newMember['address'] = (isset($_POST['address'])) ? trim($_POST['address']) : '
 $newMember['city'] = (isset($_POST['city'])) ? trim($_POST['city']) : '';
 $newMember['state'] = (isset($_POST['state'])) ? trim($_POST['state']) : '';
 $newMember['zip'] = (isset($_POST['zip'])) ? trim($_POST['zip']) : '';
-$newMember['country'] = (isset($_POST['country'])) ? trim($_POST['country']) : '';
 $newMember['email'] = (isset($_POST['email'])) ? trim($_POST['email']) : '';
 $newMember['phone'] = (isset($_POST['phone'])) ? trim($_POST['phone']) : '';
-$newMember['mailinglist'] = (isset($_POST['mailinglist'])) ? true : false;
 
 // if the form was submitted
 
