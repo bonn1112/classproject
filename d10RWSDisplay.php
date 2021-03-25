@@ -282,7 +282,7 @@ class d10RWSDisplay
                             
                             <td>
                                 $dateReleased <br />
-                                <a href="d10Reviews.php?spapk=$spapk">View Reviews</a>
+                                <a href="d10Reviews.php?treatments_id=$treatments_id">View Reviews</a>
                             </td>
 
                             <td>
@@ -494,7 +494,7 @@ class d10RWSDisplay
         }
         $output .= <<<HTML
                         <p style="text-align: center">
-                            <a href="d10AddEditreview.php?spapk=$aPK">[Review spa]</a> 
+                            <a href="d10AddEditreview.php?treatments_id=$aPK">[Review spa]</a> 
                                 &nbsp;&nbsp;<a href="d10Search.php">[Back to Search Page]</a>
                         </p>
                     HTML;
@@ -568,7 +568,7 @@ class d10RWSDisplay
             $reviewsummary = '';
             $reviewrating = '';
             $buttonText = 'Add';
-            $hiddenInputName = 'spapk';
+            $hiddenInputName = 'treatments_id';
         }
         else
         {

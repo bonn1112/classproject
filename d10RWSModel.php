@@ -168,7 +168,7 @@ class d10RWSModel
     {
         $query = <<<STR
                     Select reviewpk, reviewdate, reviewsummary, reviewrating, spaname
-                    From spareview inner join spa on spapk = spafk
+                    From spareview inner join spa on treatments_id = spafk
                     where contactfk = $aContactPK
                     Order by reviewdate desc
                 STR;
