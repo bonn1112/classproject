@@ -167,7 +167,7 @@ class d10RWSModel
     function getUserReviews(int $aContactPK) : array
     {
         $query = <<<STR
-                    Select reviewpk, reviewdate, reviewsummary, reviewrating, spaname
+                    Select reviewpk, reviewdate, reviewsummary, reviewrating, treatments
                     From spareview inner join spa on treatments_id = spafk
                     where contactfk = $aContactPK
                     Order by reviewdate desc
@@ -181,7 +181,7 @@ class d10RWSModel
     function getReviewDetails(int $aReviewPK, int $aContactFK) : array
     {
         $query = <<<STR
-                    Select reviewsummary, reviewrating, spaname
+                    Select reviewsummary, reviewrating, treatments
                     From spareview inner join spa on  = spafk
                     where reviewpk = $aReviewPK and contactfk = $aContactFK
                 STR;
