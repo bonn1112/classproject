@@ -80,6 +80,9 @@ class d10RWSDisplay
     function displaySearchForm (string $aTitle, string $aPitch, int $aRatingPK) : void
     {
         $output = <<<HTML
+                    <div>
+                        <a href="d9Viewcart.php">View Cart</a>
+                    </div>
                     <form action="d10Search.php" method = "post" name="SearchByMultiCriteria" id="SearchByMultiCriteria">
                     <label for="spaname">Spa Title:</label>
                     <input type="text" name="spaname" id="spaname" maxlength="50" value="$aTitle" />
@@ -89,7 +92,7 @@ class d10RWSDisplay
                     <select name="ratingpk" id="rating">
                     <option value=""></option>
                 
-                    <label <h1>Our Services  <img src="https://cisweb.biz.colostate.edu/cis665/SP21Tan.studia/PHPDemos/PhpProject/photo2.jpg" alt="Yume Shima Spa" /></h1></label>
+                    <label> <h1> Our Services  <img src="https://cisweb.biz.colostate.edu/cis665/SP21Tan.studia/PHPDemos/PhpProject/photo2.jpg" alt="Yume Shima Spa" /></h1></label>
         
                      <p>Services that we provide:</p>
 
@@ -219,6 +222,29 @@ class d10RWSDisplay
                 HTML;
         echo $output;
     }
+
+    function displaySearchFormCart(string $aName) : void
+    {
+        $output = <<<HTML
+                    <div>
+                        <a href="d9Viewcart.php">View Cart</a>
+                    </div>
+                    <form action="d9ShopSearch.php" method = "post">
+                        <h2 style="text-align: center">Spa courses</h2>
+
+                        <label for="coursename">coursename:</label>
+
+                        <!-- Todo You can add the courses -->
+
+                        <input type="text" name="coursename" id ="coursename" maxlength="50" 
+                            autofocus pattern="^[a-zA-Z\s]*$" title="Letters only" value="$aName" />
+                        <p>
+                            <input type="submit" value="Search" name="search" />
+                        </p>
+                    </form>
+                HTML;
+        echo $output;
+    }
     
     function displaySearchResults(array $aResults): void
     {
@@ -254,6 +280,10 @@ class d10RWSDisplay
                             <td>
                                 $dateReleased <br />
                                 <a href="d10Reviews.php?spapk=$spapk">View Reviews</a>
+                            </td>
+
+                            <td>
+                                <input name = "submit" type="submit" value="Add to Cart" />
                             </td>
                         </tr>
                         <tr>
