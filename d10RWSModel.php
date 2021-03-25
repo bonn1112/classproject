@@ -233,6 +233,61 @@ class d10RWSModel
         
         self::executeQuery($query);
     }
+
+    function getMerchandiseByName(string $aMerchandiseName) : array
+    {
+        $query = <<<STR
+                    Select merchandisepk, merchandisename, merchandiseprice, imagenamesmall
+                    From merchandise
+                    Where merchandisename like '%$aMerchandiseName%'
+                STR;
+
+        return self::executeQuery($query);
+    }
+
+    function getMerchandiseDetailsByPK(int $aMerchandisePK) : array
+    {
+        $query = <<<STR
+                    Select merchandisepk, merchandisename, merchandisedescription, 
+                        merchandiseprice, imagenamelarge, movietitle
+                    From merchandise inner join film on filmfk = filmpk
+                    Where merchandisepk = $aMerchandisePK
+            STR;
+
+        return self::executeQuery($query);
+    }
+
+    function getMerchandiseInCart(string $merchandisePKs) : array
+    {
+        $query = <<<STR
+                    Select merchandisepk, merchandisename, merchandiseprice
+                    From merchandise
+                    Where merchandisepk in ($merchandisePKs)
+                STR;
+
+        return self::executeQuery($query);
+    }
+    
+    function insertOrder(int $aContactFK): array
+    {
+        $query = <<<STR
+                    Insert into merchandiseorder(contactfk)
+                    Values ($aContactFK);
+                    Select SCOPE_IDENTITY() As newOrderID;
+                STR;
+
+        return self::executeQuery($query);
+    }
+
+    function insertOrderItem(int $aMerchandiseOrderFK, int $aMerchandiseFK, int $aOrderQty) : void
+    {
+            $query = <<<STR
+                        Insert into merchandiseorderitem(merchandiseorderfk, merchandisefk, orderqty)
+                        Values ($aMerchandiseOrderFK, $aMerchandiseFK, $aOrderQty)
+                    STR;
+
+        self::executeQuery($query);
+    }
     
     // insert a new review
     

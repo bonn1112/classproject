@@ -260,10 +260,13 @@ class d10RWSDisplay
                     <table>
                     <caption>$count spa(s) found</caption>
                         <tbody>
+                    <h2 style="text-align: center">$merchandisename</h2>
+                    <form action="d9UpdateCart.php" method = "post">
+                    <input type="hidden" name="merchandisepk" value =$merchandisepk />
                 HTML;
         
         $spaNum = 0;
-        
+
         foreach ($aResults as $aspa)
         {
             extract($aspa);
@@ -296,6 +299,146 @@ class d10RWSDisplay
     
         $output .= "<tbody></table>";
     
+        echo $output;
+    }
+
+    function displayShopCart(array $aList) : void
+    {
+        // get a count of the number of items in the cart
+
+        $cartItems = count($aList);
+
+        // prepare the output using heredoc syntax
+
+        $output = <<<HTML
+                    <h2 style="text-align: center">You have $cartItems product(s) in your cart</h2>
+                    <table>
+                        <tr>
+                            <th>Course</th>
+                            <th>During</th>
+                            <th>Unit Price</th>
+                            <th>Extended price</th>
+                        </tr>
+                HTML;
+
+        foreach ($aList as $aItem)
+        {
+            extract($aItem);
+            $merchandiseQty = $_SESSION['aCart']->getQtyByMerchandiseID((int)$merchandisepk);
+            $extendedPrice = $merchandiseQty * $merchandiseprice;
+            $totalPrice += $extendedPrice;
+            $formattedExtendedPrice = number_format($extendedPrice, 2);
+            $formattedPrice = number_format((float)$merchandiseprice, 2);
+            $output .= <<<HTML
+                        <tr>
+                            <td>
+                                $merchandisename
+                            </td>
+                            <td>
+                                <form action="d9UpdateCart.php" method="post">
+                                    <input type="hidden" name="merchandisepk" value="$merchandisepk" />
+                                    <input type="number" name="merchandiseqty" 
+                                        value="$merchandiseQty" size="2" maxlength="2" 
+                                        required="required" min="0" max="20" />
+                                    <input type="submit" name=submit" value="Update Quantity" />
+                                </form>
+                            </td>
+                            <td style="text-align: right">
+                                $$formattedPrice
+                            </td>
+                            <td style="text-align: right">
+                                $$formattedExtendedPrice
+                            </td>
+                        </tr>
+                    HTML;
+        }
+        $formattedTotalPrice = number_format($totalPrice,2);
+        $output .= <<<HTML
+                        <tr>
+                            <td colspan="2" style="text-align: center">
+                                <b>Your order total is: $$formattedTotalPrice</b>
+                            </td>
+                            <td colspan="2" style="text-align: center">
+                                <form action="d9Checkout.php" method="post">
+                                    <input type="submit" name="submit" id="proceed" value = "Proceed to Checkout" />
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                    <p style="text-align: center">
+                        <a href="d9ShopSearch.php">[Continue shopping]</a>
+                    </p>
+                HTML;
+
+        // display the output
+
+        echo $output;
+    }
+    
+    function displayCheckOut(array $aList) : void
+    {
+        // get a count of the number of items in the cart
+
+        $cartItems = count($aList);
+
+        $contactName = $_SESSION['userInfo']['firstname'];
+
+        $output = <<<HTML
+                    <h2 style="text-align: center">Hi $contactName, You have $cartItems product(s) in your cart</h2>
+                    <table>
+                        <tr>
+                            <th>Course</th>
+                            <th>During</th>
+                            <th>Unit Price</th>
+                            <th>Extended price</th>
+                        </tr>
+                HTML;
+
+        foreach ($aList as $aItem)
+        {
+            extract($aItem);
+            $merchandiseQty = $_SESSION['aCart']->getQtyByMerchandiseID((int)$merchandisepk);
+            $extendedPrice = $merchandiseQty * $merchandiseprice;
+            $totalPrice += $extendedPrice;
+            $formattedExtendedPrice = number_format($extendedPrice, 2);
+            $formattedPrice = number_format((float)$merchandiseprice, 2);
+            $output .= <<<HTML
+                            <tr>
+                                <td>
+                                    $merchandisename
+                                </td>
+                                <td style="text-align: right; font-style: normal">
+                                    $merchandiseQty
+                                </td>
+                                <td style="text-align: right">
+                                    $$formattedPrice
+                                </td>
+                                <td style="text-align: right">
+                                    $$formattedExtendedPrice
+                                </td>
+                            </tr>
+                        HTML;
+        }
+        $formattedTotalPrice = number_format($totalPrice,2);
+        $output .= <<<HTML
+                        <tr>
+                            <td colspan="2" style="text-align: center">
+                                <b>Your order total is: $$formattedTotalPrice</b>
+                            </td>
+                            <td colspan="2" style="text-align: center">
+                            <form action="d9PlaceOrder.php" method="post">
+                                <input type="submit" name="submit" value = "Place Order" />
+                            </form>
+                            </td>
+                        </tr>
+                    </table>
+                    <p style="text-align: center">
+                        <a href="d9ShopSearch.php">[Continue shopping]</a>
+                    </p>
+                HTML;
+
+        // display the output
+
         echo $output;
     }
     
