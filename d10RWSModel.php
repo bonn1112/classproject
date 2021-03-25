@@ -194,9 +194,8 @@ class d10RWSModel
     function getUserData(string $aUserName, string $aUserPassword) : array
     {
         $query = <<<STR
-                    Select contactpk, firstname, userrolename
-                    From contact inner join userrole
-                    on userrolefk = userrolepk
+                    Select contactpk, firstname
+                    From contact
                     Where userlogin = '$aUserName'
                     and userpassword = '$aUserPassword'
                 STR;

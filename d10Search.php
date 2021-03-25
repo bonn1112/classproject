@@ -37,26 +37,25 @@ if (isset($_POST['search']))
     $spaname = preg_replace("/[^a-zA-Z0-9\s]/", '', $spaname);
     $pitchText = preg_replace("/[^a-zA-Z0-9\s]/", '', $pitchText);
     $ratingPK = preg_replace("/[^0-9]/", "", $ratingPK);
+
+    // If a user is visiting this page for the first time
+
+        // instantiate a d10RWSModel object
+
+        $aModel = new d10RWSModel();
+        
+        $results = $aModel->getspasByMultiCriteria($spaname,$pitchText, (int)$ratingPK);
+        
+        // call the displaySearchResults method
+
+        $aDisplay->displaySearchResults($results);
+
 }
 
 // call the displaySearchForm method
 
 $aDisplay->displaySearchForm($spaname,$pitchText, (int)$ratingPK);
-
-// if the user initiated a search
-
-if (isset($_POST['search']))
-{
-    // instantiate a d10RWSModel object
-
-    $aModel = new d10RWSModel();
-    
-    $results = $aModel->getspasByMultiCriteria($spaname,$pitchText, (int)$ratingPK);
-    
-    // call the displaySearchResults method
-
-     $aDisplay->displaySearchResults($results);
-}
+                  
 
 echo  "<img src='https://cisweb.biz.colostate.edu/cis665/SP21Tan.studia/PHPDemos/PhpProject/photo2.jpg' alt='Yume Shima Spa' />";
 echo "<h1>Our Spa Services </h1>";
