@@ -138,7 +138,7 @@ class d10RWSModel
 
     // return the spa name for a spapk
     
-    function getAcourseName(int $aSpaPK) : array
+    function getAspaName(int $aSpaPK) : array
     {
         $query = <<<STR
                     Select treatments
