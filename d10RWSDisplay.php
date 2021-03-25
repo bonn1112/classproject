@@ -290,7 +290,7 @@ class d10RWSDisplay
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2">
+                            <td colspan="3">
                             $summary
                             </td>
                         </tr>

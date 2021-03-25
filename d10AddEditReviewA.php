@@ -29,14 +29,14 @@ if (isset($_POST['reviewpk']))
     $aModel->updateReview((int)$_POST['reviewpk'], $_POST['reviewsummary'], (int) $_POST['reviewrating']);
     $message = "You have updatated your review";
 }
-elseif (isset($_POST['filmpk'])) // if $_POST has a filmpk element,call the add method
+elseif (isset($_POST['treatments_id'])) // if $_POST has a filmpk element,call the add method
 {
     $contactPK = (int) $_SESSION['userInfo']['contactpk'];
     
     $aModel = new d10RWSModel();
     
     $aModel->addNewReview($_POST['reviewsummary'], 
-            (int)$_POST['reviewrating'], (int)$_POST['filmpk'], $contactPK);
+            (int)$_POST['reviewrating'], (int)$_POST['treatments_id'], $contactPK);
     $message = "You have added a review";
 }
 

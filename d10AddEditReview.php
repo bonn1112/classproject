@@ -25,9 +25,9 @@ $editmode = false;
 
 // if a numeric spapk was passed through the URL
 
-if ((isset($_GET['spapk'])) && (is_numeric($_GET['spapk'])))
+if ((isset($_GET['treatments_id'])) && (is_numeric($_GET['treatments_id'])))
 {
-    $spapk = (int) $_GET['spapk'];
+    $spapk = (int) $_GET['treatments_id'];
     
     // instantiate a d10RWSModel object
 
@@ -44,7 +44,7 @@ if ((isset($_GET['spapk'])) && (is_numeric($_GET['spapk'])))
     }
     else
     {
-        $formTitle = "Add a review for <br /> '{$aSpa[0]['spaname']}'";
+        $formTitle = "Add a review for <br /> '{$aSpa[0]['treatment']}'";
     }    
 }
 // elseif a numeric reviewpk was passed through the URL
@@ -70,7 +70,7 @@ elseif ((isset($_GET['reviewpk'])) && (is_numeric($_GET['reviewpk'])))
     }
     else
     {
-        $formTitle = "Update your review of <br /> '{$reviewDetails[0]['spaname']}'";
+        $formTitle = "Update your review of <br /> '{$reviewDetails[0]['treatment']}'";
         $editmode = true;
     }
 }

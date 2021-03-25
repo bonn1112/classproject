@@ -12,19 +12,19 @@ spl_autoload_register(function ($class_name){
     include $class_name . '.php';
 });
 
-$listPage = 'd10home.php';
+// $listPage = 'd10home.php';
 
 // If spapk is not passed with page request or it's not numeric, redirect to Home Page
 // Else, assign the URL parameter to a variable
 
-if (!isset($_GET['spapk'])|| !is_numeric($_GET['spapk']))
+if (!isset($_GET['treatments_id'])|| !is_numeric($_GET['treatments_id']))
 {
     header('Location:' . $listPage);
     exit();
 }
 else
 {
-    $spapk = (int) $_GET['spapk'];
+    $spapk = (int) $_GET['treatments_id'];
 }
 
 // instantiate a d10RWSModel object
