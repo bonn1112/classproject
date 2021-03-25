@@ -37,7 +37,7 @@ $aSpa = $aModel->getAcourseName($spapk);
 
 if (count($aSpa) === 1)
 {
-    $aTitle = $aSpa[0]['treatments'];
+    $aTitle = $aSpa[0]['treatment'];
 }
 else
 {
