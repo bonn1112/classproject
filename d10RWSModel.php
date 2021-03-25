@@ -167,8 +167,8 @@ class d10RWSModel
     function getUserReviews(int $aContactPK) : array
     {
         $query = <<<STR
-                    Select reviewpk, reviewdate, reviewsummary, reviewrating, spaname
-                    From spareview inner join spa on spapk = spafk
+                    Select reviewpk, reviewdate, reviewsummary, reviewrating, treatments
+                    From spareview inner join spa on treatments_id = spafk
                     where contactfk = $aContactPK
                     Order by reviewdate desc
                 STR;
@@ -181,7 +181,7 @@ class d10RWSModel
     function getReviewDetails(int $aReviewPK, int $aContactFK) : array
     {
         $query = <<<STR
-                    Select reviewsummary, reviewrating, spaname
+                    Select reviewsummary, reviewrating, treatments
                     From spareview inner join spa on  = spafk
                     where reviewpk = $aReviewPK and contactfk = $aContactFK
                 STR;
@@ -231,6 +231,61 @@ class d10RWSModel
                         '$state','$zip','$email','$phone')
             STR;
         
+        self::executeQuery($query);
+    }
+
+    function getMerchandiseByName(string $aMerchandiseName) : array
+    {
+        $query = <<<STR
+                    Select merchandisepk, merchandisename, merchandiseprice, imagenamesmall
+                    From merchandise
+                    Where merchandisename like '%$aMerchandiseName%'
+                STR;
+
+        return self::executeQuery($query);
+    }
+
+    function getMerchandiseDetailsByPK(int $aMerchandisePK) : array
+    {
+        $query = <<<STR
+                    Select merchandisepk, merchandisename, merchandisedescription, 
+                        merchandiseprice, imagenamelarge, movietitle
+                    From merchandise inner join film on filmfk = filmpk
+                    Where merchandisepk = $aMerchandisePK
+            STR;
+
+        return self::executeQuery($query);
+    }
+
+    function getMerchandiseInCart(string $merchandisePKs) : array
+    {
+        $query = <<<STR
+                    Select merchandisepk, merchandisename, merchandiseprice
+                    From merchandise
+                    Where merchandisepk in ($merchandisePKs)
+                STR;
+
+        return self::executeQuery($query);
+    }
+    
+    function insertOrder(int $aContactFK): array
+    {
+        $query = <<<STR
+                    Insert into merchandiseorder(contactfk)
+                    Values ($aContactFK);
+                    Select SCOPE_IDENTITY() As newOrderID;
+                STR;
+
+        return self::executeQuery($query);
+    }
+
+    function insertOrderItem(int $aMerchandiseOrderFK, int $aMerchandiseFK, int $aOrderQty) : void
+    {
+            $query = <<<STR
+                        Insert into merchandiseorderitem(merchandiseorderfk, merchandisefk, orderqty)
+                        Values ($aMerchandiseOrderFK, $aMerchandiseFK, $aOrderQty)
+                    STR;
+
         self::executeQuery($query);
     }
     
