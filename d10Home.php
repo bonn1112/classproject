@@ -73,7 +73,6 @@ if (!empty($userFName))
     }
 ?>
 
-<p>Find information about our classic and contemporary films and read member reviews.  Become a member today to add your own reviews. We know you are a better judge of our films than those snooty "critics" at the Collegian.</p>
 <p>Enjoy your visit. Have fun!</p>
 
 <?php

@@ -48,11 +48,19 @@ class d10RWSModel
             // execute query and assign results to a PDOStatement object
 
             $stmt = $conn->query($query);
-
-            if ($stmt->columnCount() > 0)  // if rows with columns are returned
+            
+            do
             {
-                $results = $stmt->fetchAll(PDO::FETCH_ASSOC);  //retreive the rows as an associative array
-            }
+                if ($stmt->columnCount() > 0)  // if rows with columns are returned
+                {
+                    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);  //retreive the rows as an associative array
+                }
+            } while ($stmt->nextRowset());
+
+//            if ($stmt->columnCount() > 0)  // if rows with columns are returned
+//            {
+//                $results = $stmt->fetchAll(PDO::FETCH_ASSOC);  //retreive the rows as an associative array
+//            }
 
             //call dbDisconnect() method to close the connection
 
@@ -182,7 +190,7 @@ class d10RWSModel
     {
         $query = <<<STR
                     Select reviewsummary, reviewrating, treatment
-                    From spareview inner join spa on  = spafk
+                    From spareview inner join spa on  treatments_id = spafk
                     where reviewpk = $aReviewPK and contactfk = $aContactFK
                 STR;
 
@@ -249,8 +257,8 @@ class d10RWSModel
     {
         $query = <<<STR
                     Select merchandisepk, merchandisename, merchandisedescription, 
-                        merchandiseprice, imagenamelarge, movietitle
-                    From merchandise inner join film on filmfk = filmpk
+                        merchandiseprice,  imagenamesmall, imagenamelarge
+                    From merchandise inner join spa on spafk = treatments_id
                     Where merchandisepk = $aMerchandisePK
             STR;
 
