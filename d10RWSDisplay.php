@@ -76,20 +76,23 @@ class d10RWSDisplay
          ABC;
         echo $output;
     }
+     //<label for="pitchtext">Tag Line:</label>
+      //              <input type="text" name="pitchtext" id="pitchtext" maxlength="50" value="$aPitch" />
     
     function displaySearchForm (string $aTitle, string $aPitch, int $aRatingPK) : void
     {
         $output = <<<HTML
-                    <div>
-                        <a href="d9Viewcart.php">View Cart</a>
-                    </div>
+                    <div><br>
+                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="d9Viewcart.php">View Cart</a>
+                    </div><br>
                     <form action="d10Search.php" method = "post" name="SearchByMultiCriteria" id="SearchByMultiCriteria">
                     <label for="spaname">Spa Title:</label>
                     <input type="text" name="spaname" id="spaname" maxlength="50" value="$aTitle" />
-                    <label for="pitchtext">Tag Line:</label>
-                    <input type="text" name="pitchtext" id="pitchtext" maxlength="50" value="$aPitch" />
+                   
                     <label for="rating">Spa Rating:</label>
                     <select name="ratingpk" id="rating">
+                
+                    
                     <option value=""></option>
                 
                     <label> <h1> Our Services  <img src="https://cisweb.biz.colostate.edu/cis665/SP21Tan.studia/PHPDemos/PhpProject/photo2.jpg" alt="Yume Shima Spa" /></h1></label>
@@ -124,7 +127,7 @@ class d10RWSDisplay
 
                     <thead>
                         <tr>
-                            <th>Treatments</th>
+                            <th>Treatment</th>
                             <th>Hours</th>
                             <th>Price</th>
 
@@ -276,7 +279,7 @@ class d10RWSDisplay
         
             $output .= <<<HTML
                         <tr>
-                            <td>$spaNum: $treatments for $hours is $$price<br />
+                            <td>$spaNum: $treatment for $hours is $$price<br />
                                 
                             </td>
                             
@@ -284,13 +287,18 @@ class d10RWSDisplay
                                 $dateReleased <br />
                                 <a href="d10Reviews.php?treatments_id=$treatments_id">View Reviews</a>
                             </td>
+                    
+                            <td>
+                                $dateReleased <br />
+                                <a href="d10AddEditReview.php?treatments_id=$treatments_id">Add Reviews</a>
+                            </td>
 
                             <td>
-                                <input name = "submit" type="submit" value="Add to Cart" />
+                                <input name = "submit" type="submit" value="Make RSVP" />
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2">
+                            <td colspan="4">
                             $summary
                             </td>
                         </tr>
@@ -359,7 +367,7 @@ class d10RWSDisplay
                                 <b>Your order total is: $$formattedTotalPrice</b>
                             </td>
                             <td colspan="2" style="text-align: center">
-                                <form action="d9Checkout.php" method="post">
+                                <form action="d9CheckOut.php" method="post">
                                     <input type="submit" name="submit" id="proceed" value = "Proceed to Checkout" />
                                 </form>
                             </td>
@@ -473,7 +481,7 @@ class d10RWSDisplay
                             </tr>
                             <tr>
                                 <td>
-                                    $ReviewRating Reels
+                                    $ReviewRating Stars
                                 </td>
                                 <td>
                                     Review Date: $reviewdate
@@ -530,12 +538,21 @@ class d10RWSDisplay
                                     $spaname
                                 </td>
                                 <td colspan="3">
+                                   <b>$treatment</b> 
+                                </td>
+                            </tr>                         
+                            <tr>
+                                <td>
+                                    $spaname
+                                </td>
+                                <td colspan="3">
                                     $reviewsummary
                                 </td>
                             </tr>
+                            
                             <tr>
-                                <td>
-                                    $reviewrating Reels
+                                <td >
+                                    $reviewrating Stars
                                 </td>
                                 <td>
                                     Review Date: $reviewdate
@@ -568,7 +585,7 @@ class d10RWSDisplay
             $reviewsummary = '';
             $reviewrating = '';
             $buttonText = 'Add';
-            $hiddenInputName = 'treatments_id';
+            $hiddenInputName = 'spapk';
         }
         else
         {
@@ -582,13 +599,13 @@ class d10RWSDisplay
                         <input type="hidden" name ="$hiddenInputName" value = "$aPK" />
                         <label for="reviewsummary">Review Summary:</label> 
                         <input type="text" name="reviewsummary" id="reviewsummary" maxlength="100" value="$reviewsummary" 
-                            autofocus required="true" pattern="^[a-zA-Z][a-zA-Z\s,]*[a-zA-Z\?\.]$" 
-                            title="Review summary has invalid characters" /><br /><br />
-                        <label for="reviewrating" id="rr">Review Rating (1 to 10 Reels):</label>
+                            autofocus required="true" pattern="^[a-zA-Z0-9][\w\s&,]*[a-zA-Z0-9!\?\.]$" 
+                            title="Please delete the old review and update new review" /><br /><br />
+                        <label for="reviewrating" id="rr">Review Rating (1 to 5 Stars):</label>
                         <select name="reviewrating" id="reviewrating">
                 HTML;
         
-        foreach (range(1,10) as $aRating)
+        foreach (range(1,5) as $aRating)
         {
             if ($aRating == $reviewrating)
             {
