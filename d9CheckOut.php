@@ -33,7 +33,7 @@ $merchandiseIDs = implode(',', array_keys($_SESSION['aCart']->getCartItems()));
 
 // instantiate a d9RWSModel object
 
-$aModel = new d9RWSModel();
+$aModel = new d10RWSModel();
 
 //get merchandise details for the items in the cart
 
@@ -41,7 +41,7 @@ $cartList = $aModel->getMerchandiseInCart($merchandiseIDs);
 
 // instantiate a d9RWSDisplay object
 
-$aDisplay = new d9RWSDisplay();
+$aDisplay = new d10RWSDisplay();
 
 // call the displayPageHeader method
 
