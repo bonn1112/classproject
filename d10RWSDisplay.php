@@ -585,7 +585,7 @@ class d10RWSDisplay
             $reviewsummary = '';
             $reviewrating = '';
             $buttonText = 'Add';
-            $hiddenInputName = 'spapk';
+            $hiddenInputName = 'treatments_id';
         }
         else
         {

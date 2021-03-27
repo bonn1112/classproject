@@ -29,7 +29,7 @@ d9RWSAuthCheck::isAuthenticated($_SERVER['PHP_SELF']); // get the file name of t
 
 // instantiate a d9RWSModel object
 
-$aModel = new d9RWSModel();
+$aModel = new d10RWSModel();
 
 // call the insertOrder method; get the orderPK of the newly added order
 
@@ -51,7 +51,7 @@ foreach($_SESSION['aCart']->getCartItems() as $aKey => $aValue)
 
 // instantiate a d9RWSDisplay object
 
-$aDisplay = new d9RWSDisplay();
+$aDisplay = new d10RWSDisplay();
 
 // call the displayPageHeader method
 

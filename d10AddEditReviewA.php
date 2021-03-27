@@ -35,10 +35,19 @@ elseif (isset($_POST['treatments_id'])) // if $_POST has a filmpk element,call t
     
     $aModel = new d10RWSModel();
     
+    if (!isset($_POST['reviewsummary']))
+    {
+        echo "error Null not given";
+    }elseif (!isset($_POST['reviewrating']))
+    {
+        echo "error Null not given";
+    }
+
     $aModel->addNewReview($_POST['reviewsummary'], 
             (int)$_POST['reviewrating'], (int)$_POST['treatments_id'], $contactPK);
     $message = "You have added a review";
 }
+
 
 header("Refresh: 3; URL=$myReviewsPage");
 echo "<h2>$message. Redirecting to your reviews page....<h2>";

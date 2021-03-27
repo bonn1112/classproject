@@ -42,7 +42,7 @@ else
 
 // instantiate a d9RWSDisplay object
 
-$aDisplay = new d9RWSDisplay();
+$aDisplay = new d10RWSDisplay();
 
 // call the displayPageHeader method
 
@@ -58,7 +58,7 @@ if (isset($_POST['search']) || isset($_COOKIE['lastsearch']))
 {
     // instantiate a d9RWSModel object
 
-    $aModel = new d9RWSModel();
+    $aModel = new d10RWSModel();
     
     $results = $aModel->getMerchandiseByName($merchandiseName);
     
