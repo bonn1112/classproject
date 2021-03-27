@@ -27,7 +27,7 @@ if (isset($_POST['reviewpk']))
     $aModel = new d10RWSModel();
     
     $aModel->updateReview((int)$_POST['reviewpk'], $_POST['reviewsummary'], (int) $_POST['reviewrating']);
-    $message = "You have updatated your review";
+    $message = "You have updated your review";
 }
 elseif (isset($_POST['treatments_id'])) // if $_POST has a filmpk element,call the add method
 {

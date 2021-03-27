@@ -48,11 +48,19 @@ class d10RWSModel
             // execute query and assign results to a PDOStatement object
 
             $stmt = $conn->query($query);
-
-            if ($stmt->columnCount() > 0)  // if rows with columns are returned
+            
+            do
             {
-                $results = $stmt->fetchAll(PDO::FETCH_ASSOC);  //retreive the rows as an associative array
-            }
+                if ($stmt->columnCount() > 0)  // if rows with columns are returned
+                {
+                    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);  //retreive the rows as an associative array
+                }
+            } while ($stmt->nextRowset());
+
+//            if ($stmt->columnCount() > 0)  // if rows with columns are returned
+//            {
+//                $results = $stmt->fetchAll(PDO::FETCH_ASSOC);  //retreive the rows as an associative array
+//            }
 
             //call dbDisconnect() method to close the connection
 
@@ -117,7 +125,7 @@ class d10RWSModel
         if ($aTitle != '')
         {
             $query .= <<<STR
-                        And treatments like '%$aTitle%'
+                        And treatment like '%$aTitle%'
                     STR;
         }
         
@@ -130,7 +138,7 @@ class d10RWSModel
         
        
         $query .= <<<STR
-                    Order by treatments
+                    Order by treatment
                 STR;
         
         return self::executeQuery($query);
@@ -138,10 +146,10 @@ class d10RWSModel
 
     // return the spa name for a spapk
     
-    function getAcourseName(int $aSpaPK) : array
+    function getAspaName(int $aSpaPK) : array
     {
         $query = <<<STR
-                    Select treatments
+                    Select treatment
                     From spa
                     Where treatments_id = $aSpaPK
                 STR;
@@ -167,7 +175,7 @@ class d10RWSModel
     function getUserReviews(int $aContactPK) : array
     {
         $query = <<<STR
-                    Select reviewpk, reviewdate, reviewsummary, reviewrating, treatments
+                    Select reviewpk, reviewdate, reviewsummary, reviewrating, treatment
                     From spareview inner join spa on treatments_id = spafk
                     where contactfk = $aContactPK
                     Order by reviewdate desc
@@ -181,8 +189,8 @@ class d10RWSModel
     function getReviewDetails(int $aReviewPK, int $aContactFK) : array
     {
         $query = <<<STR
-                    Select reviewsummary, reviewrating, treatments
-                    From spareview inner join spa on  = spafk
+                    Select reviewsummary, reviewrating, treatment
+                    From spareview inner join spa on  treatments_id = spafk
                     where reviewpk = $aReviewPK and contactfk = $aContactFK
                 STR;
 
@@ -249,8 +257,8 @@ class d10RWSModel
     {
         $query = <<<STR
                     Select merchandisepk, merchandisename, merchandisedescription, 
-                        merchandiseprice, imagenamelarge, movietitle
-                    From merchandise inner join film on filmfk = filmpk
+                        merchandiseprice,  imagenamesmall, imagenamelarge
+                    From merchandise inner join spa on spafk = treatments_id
                     Where merchandisepk = $aMerchandisePK
             STR;
 

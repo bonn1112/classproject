@@ -35,7 +35,7 @@ if ((isset($_GET['treatments_id'])) && (is_numeric($_GET['treatments_id'])))
 
     // get the spaname associated with the spapk
     
-    $aSpa = $aModel->getAspaname($spapk);
+    $aSpa = $aModel->getAspaName($spapk);
 
     if (count($aSpa) !== 1)
     {

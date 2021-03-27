@@ -33,11 +33,11 @@ $aModel = new d10RWSModel();
 
 // get the spaname associated with the spapk
     
-$aSpa = $aModel->getAcourseName($spapk);
+$aSpa = $aModel->getAspaName($spapk);
 
 if (count($aSpa) === 1)
 {
-    $aTitle = $aSpa[0]['treatments'];
+    $aTitle = $aSpa[0]['treatment'];
 }
 else
 {
